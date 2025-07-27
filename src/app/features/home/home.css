@@ -1,0 +1,121 @@
+.hero-section {
+  position: relative;
+  direction: rtl;
+}
+
+.hero-section .flex {
+  width: calc(100% * 3); 
+  transition: transform 0.5s ease-in-out;
+}
+
+.hero-section img {
+  transition: transform 0.3s ease;
+}
+
+.hero-section:hover img {
+  transform: scale(1.02);
+}
+
+.hero-section button {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section button:hover {
+  transform: scale(1.1);
+}
+
+.hero-section .absolute.bottom-4 button {
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.hero-section .absolute.bottom-4 button:hover {
+  transform: scale(1.2);
+}
+
+.features-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.features-section .bg-white {
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.features-section .bg-white:hover {
+  transform: translateY(-2px);
+  border-color: #3b82f6;
+}
+
+.features-section .w-12 {
+  transition: all 0.3s ease;
+}
+
+.features-section .bg-white:hover .w-12 {
+  background-color: #dbeafe;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+  
+  .hero-section p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  
+  .features-section .flex {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .features-section .space-x-4 {
+    margin: 0;
+  }
+  
+  .features-section .space-x-4 > * + * {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+}
+
+[dir="rtl"] .hero-section .absolute.left-4 {
+  left: auto;
+  right: 1rem;
+}
+
+[dir="rtl"] .hero-section .absolute.right-4 {
+  right: auto;
+  left: 1rem;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-section .text-center {
+  animation: fadeInUp 1s ease-out;
+}
+
+.features-section .bg-white {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.features-section .bg-white:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.features-section .bg-white:nth-child(3) {
+  animation-delay: 0.4s;
+}

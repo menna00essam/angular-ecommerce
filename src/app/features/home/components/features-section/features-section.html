@@ -1,0 +1,20 @@
+ <section class="container py-10 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div *ngFor="let feature of features"
+               class="flex items-center rtl:flex-row-reverse gap-4 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow bg-[var(--surface-color)] text-[var(--text-primary)]">
+            
+            <div class="flex-1 text-start">
+              <h3 class="text-lg font-semibold mb-1">
+                {{ feature.title | translate }}
+              </h3>
+              <p class="text-[var(--text-secondary)]">{{ feature.description | translate }}</p>
+            </div>
+            
+            <div class="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center">
+              <mat-icon class="text-white">{{ feature.icon }}</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

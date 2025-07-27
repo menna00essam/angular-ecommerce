@@ -1,0 +1,41 @@
+ <div class="flex flex-wrap justify-between items-center mt-6 gap-4">
+      <div class="flex gap-1">
+        <button 
+          class="px-3 py-1 border rounded" 
+          [disabled]="currentPage === 1" 
+          (click)="onPageChange(currentPage - 1)"
+        >
+          {{ 'products.previous' | translate }}
+        </button>
+
+        @for (page of getVisiblePages(); track page) {
+          @if (page === '...') {
+            <span class="px-2">...</span>
+          } @else {
+            <button 
+              class="px-3 py-1 border rounded" 
+              [class.bg-primary]="page === currentPage" 
+              [class.text-white]="page === currentPage" 
+              (click)="onPageChange(+page)"
+            >
+              {{ page }}
+            </button>
+          }
+        }
+
+        <button 
+          class="px-3 py-1 border rounded" 
+          [disabled]="currentPage === totalPages" 
+          (click)="onPageChange(currentPage + 1)"
+        >
+          {{ 'products.next' | translate }}
+        </button>
+      </div>
+
+      <div class="text-sm text-gray-500">
+        {{ 'products.page' | translate }} {{ currentPage }} 
+        {{ 'products.ofPages' | translate }} {{ totalPages }} - 
+        {{ 'products.total' | translate }} {{ totalProducts }} 
+        {{ 'products.productsCount' | translate }}
+      </div>
+    </div>

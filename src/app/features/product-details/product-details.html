@@ -1,0 +1,436 @@
+<div class="max-w-7xl mx-auto px-6 py-6 font-sans  min-h-screen text-gray-800" [class.rtl]="isArabic()">
+   
+  <div *ngIf="loading()" class="flex flex-col items-center justify-center min-h-[500px] gap-4">
+    <div class="w-12 h-12 border-4 border-gray-200 border-t-green-500 rounded-full animate-spin"></div>
+    <p class="text-gray-500 text-lg font-medium">{{ 'LOADING' | translate }}</p>
+  </div>
+
+   
+  <div *ngIf="error()" class="flex items-center justify-center min-h-[400px] p-10">
+    <div class="text-center bg-gray-50 p-12 rounded-xl border-2 border-red-500 max-w-lg">
+      <div class="text-5xl mb-4">⚠️</div>
+      <h3 class="text-red-500 text-2xl font-semibold mb-3">{{ 'ERROR_OCCURRED' | translate }}</h3>
+      <p class="text-gray-500 mb-6 leading-relaxed">{{ error() }}</p>
+      <button 
+        (click)="goBack()" 
+        class="bg-gray-100 hover:bg-green-500 hover:text-white text-gray-800 py-3 px-6 rounded-xl font-medium transition-all duration-300 border-2 border-gray-200 hover:border-green-500"
+      >
+        {{ 'BACK_TO_PRODUCTS' | translate }}
+      </button>
+    </div>
+  </div>
+
+   
+  <div *ngIf="product() as p" class="space-y-12">
+     
+    <nav class="mb-8 py-4">
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a 
+          routerLink="/" 
+          class="text-primary font-medium transition-colors duration-200 hover:underline"
+        >
+          {{ 'HOME' | translate }}
+        </a>
+        <span class="text-gray-400 font-light">/</span>
+        <a 
+          routerLink="/products" 
+          class="text-primary font-medium transition-colors duration-200 hover:underline"
+        >
+          {{ 'PRODUCTS' | translate }}
+        </a>
+        <span class="text-gray-400 font-light">/</span>
+        <span class="text-gray-800 font-semibold">{{ p.category }}</span>
+      </div>
+    </nav>
+
+     
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+       
+      <div class="space-y-4">
+        <div class="relative w-full bg-gray-50 rounded-xl overflow-hidden border-2 border-gray-200 aspect-square">
+          <img 
+            [src]="selectedImage()" 
+            [alt]="p.title" 
+            class="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
+            loading="eager"
+          />
+          
+           
+          <div class="absolute top-4 left-4 flex gap-2 z-10">
+            <span 
+              *ngIf="p.meta?.createdAt && isNewProduct(p.meta.createdAt)" 
+              class="bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wide"
+            >
+              {{ 'NEW' | translate }}
+            </span>
+            <span 
+              *ngIf="p.discountPercentage && p.discountPercentage > 0" 
+              class="bg-red-500 text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wide"
+            >
+              -{{ p.discountPercentage }}%
+            </span>
+          </div>
+        </div>
+
+         
+        <div 
+          *ngIf="p?.images && p.images.length > 1" 
+          class="flex gap-3 flex-wrap"
+        >
+          <div
+            *ngFor="let image of p.images; let i = index"
+            class="w-20 h-20 rounded-xl overflow-hidden border-2 cursor-pointer transition-all duration-200 hover:border-primary hover:-translate-y-0.5"
+            [class]="selectedImageIndex() === i ? 'border-primary shadow-lg shadow-primary' : 'border-gray-200'"
+            (click)="selectImage(i)"
+          >
+            <img 
+              [src]="image" 
+              [alt]="p.title + ' image ' + (i + 1)" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+
+       
+      <div class="space-y-6">
+         
+        <div *ngIf="p.brand" class="flex items-center gap-2">
+          <span class="text-gray-500 text-sm font-medium">{{ 'BRAND' | translate }}:</span>
+          <span class="text-primary text-sm font-semibold uppercase tracking-wide">{{ p.brand }}</span>
+        </div>
+
+         
+        <h1 class="text-3xl lg:text-4xl font-bold text-gray-800 leading-tight">{{ p.title }}</h1>
+
+         
+        <div class="flex items-center gap-3 flex-wrap">
+          <div class="flex gap-0.5">
+            <span
+              *ngFor="let star of getStarArray(p.rating || 0)"
+              class="text-xl transition-colors duration-200"
+              [class]="star === 1 ? 'text-yellow-400' : 'text-gray-300'"
+            >★</span>
+          </div>
+          <span class="font-semibold text-gray-800 text-lg">{{ p.rating }}</span>
+          <span class="text-gray-500 text-sm">
+            ({{ p.rating }} {{ 'REVIEWS' | translate }})
+          </span>
+        </div>
+
+         
+        <div class="p-6 bg-gray-50 rounded-xl border border-gray-200 space-y-2">
+<ng-container *ngIf="oldPrice() as old">
+  <div class="text-xl text-gray-400 line-through">
+    {{ old | priceFormat }}
+  </div>
+</ng-container>
+
+
+         <div *ngIf="discountAmount() > 0" class="text-lg text-red-500 font-semibold">
+  {{ 'YOU_SAVE' | translate }} {{ discountAmount() | priceFormat }}
+</div>
+
+        </div>
+
+         
+        <div>
+          <span 
+            *ngIf="p.stock > 0" 
+            class="inline-flex items-center gap-2 text-primary bg-green-50 px-4 py-3 rounded-xl font-medium"
+          >
+            <span class="font-bold">✓</span>
+            {{ 'IN_STOCK' | translate }} ({{ p.stock }} {{ 'ITEMS' | translate }})
+          </span>
+          <span 
+            *ngIf="!p.stock || p.stock === 0" 
+            class="inline-flex items-center gap-2 text-red-600 bg-red-50 px-4 py-3 rounded-xl font-medium"
+          >
+            <span class="font-bold">✗</span>
+            {{ 'OUT_OF_STOCK' | translate }}
+          </span>
+        </div>
+
+         
+        <div *ngIf="p.stock > 0" class="p-6 bg-gray-50 rounded-xl border border-gray-200 space-y-6">
+          <div class="space-y-3">
+            <label class="block text-lg font-semibold text-gray-800">
+              {{ 'QUANTITY' | translate }}
+            </label>
+            <div class="flex items-center gap-4">
+              <button 
+                class="w-11 h-11 border-2 border-gray-200 bg-white rounded-xl flex items-center justify-center text-xl font-semibold transition-all duration-200 hover:border-green-500 hover:bg-green-500 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed" 
+                (click)="decreaseQuantity()" 
+                [disabled]="quantity() <= 1"
+                type="button"
+              >
+                −
+              </button>
+              <span class="text-xl font-semibold text-gray-800 min-w-8 text-center">{{ quantity() }}</span>
+              <button 
+                class="w-11 h-11 border-2 border-gray-200 bg-white rounded-xl flex items-center justify-center text-xl font-semibold transition-all duration-200 hover:border-green-500 hover:bg-green-500 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed" 
+                (click)="increaseQuantity()" 
+                [disabled]="quantity() >= p.stock"
+                type="button"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <button 
+            (click)="addToCart()" 
+            class="w-full bg-primary hover:bg-primary text-white py-4 px-6 rounded-xl font-semibold text-lg flex items-center justify-between transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg min-h-12"
+            type="button"
+          >
+            <div class="flex items-center gap-3">
+              <span>{{ 'ADD_TO_CART' | translate }}</span>
+            </div>
+<span class="font-bold">{{ totalPrice() | priceFormat }}</span>
+          </button>
+        </div>
+
+         
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6 bg-gray-50 rounded-xl border border-gray-200">
+          <div class="flex items-center gap-3 text-gray-600 text-sm font-medium">
+            <span>{{ 'FREE_SHIPPING' | translate }}</span>
+          </div>
+          <div class="flex items-center gap-3 text-gray-600 text-sm font-medium">
+            <span>{{ 'FREE_RETURNS' | translate }}</span>
+          </div>
+          <div class="flex items-center gap-3 text-gray-600 text-sm font-medium">
+            <span>{{ 'PRODUCT_WARRANTY' | translate }}</span>
+          </div>
+        </div>
+
+         
+        <div class="pt-4 border-t border-gray-200">
+          <button 
+            (click)="shareProduct()" 
+            class="flex items-center gap-2 text-primary hover:text-primary font-medium transition-colors duration-200 hover:underline"
+            type="button"
+          >
+            {{ 'SHARE_PRODUCT' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+     
+   <div class="my-12 p-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+     
+    <div class="flex flex-row items-center text-start p-6 bg-white rounded-xl border border-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-green-500 gap-4">
+      <img 
+        src="assets/images/tapy.webp" 
+        alt="{{ 'INSTALLMENT_PAYMENT' | translate }}" 
+        class="w-24 h-24 object-contain rounded-xl"
+      />
+      <div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-2">
+          {{ 'INSTALLMENT_DESCRIPTION' | translate }}
+        </p>
+        <a 
+          routerLink="/" 
+          class="text-primary hover:text-primary text-sm font-semibold transition-colors duration-200 hover:underline"
+        >
+          {{ 'LEARN_MORE' | translate }}
+        </a>
+      </div>
+    </div>
+
+     
+    <div class="flex flex-row items-center text-start p-6 bg-white rounded-xl border border-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-green-500 gap-4">
+      <img 
+        src="assets/images/sPOII.png" 
+        alt="{{ 'INSTALLMENT_PAYMENT' | translate }}" 
+        class="w-24 h-24 object-contain rounded-xl"
+      />
+      <div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-2">
+          {{ 'INSTALLMENT_DESCRIPTION' | translate }}
+        </p>
+        <a 
+          routerLink="/" 
+          class="text-primary hover:text-primary text-sm font-semibold transition-colors duration-200 hover:underline"
+        >
+          {{ 'LEARN_MORE' | translate }}
+        </a>
+      </div>
+    </div>
+
+     
+    <div class="flex flex-row items-center text-start p-6 bg-white rounded-xl border border-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-green-500 gap-4">
+      <img 
+        src="assets/images/tamara.png" 
+        alt="{{ 'INSTALLMENT_PAYMENT' | translate }}" 
+        class="w-24 h-24 object-contain rounded-xl"
+      />
+      <div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-2">
+          {{ 'INSTALLMENT_DESCRIPTION' | translate }}
+        </p>
+        <a 
+          routerLink="/" 
+          class="text-primary hover:text-primary text-sm font-semibold transition-colors duration-200 hover:underline"
+        >
+          {{ 'LEARN_MORE' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+     
+    <div class="my-12 bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+       
+      <div class="flex bg-gray-50 border-b border-gray-200">
+        <button
+          class="flex-1 py-5 px-6 font-medium text-gray-500 transition-all duration-200 border-b-3 border-transparent hover:bg-green-50 hover:text-green-500"
+          [class]="selectedTab === 'description' ? 'bg-white text-primary border-primary font-semibold' : ''"
+          (click)="changeTab('description')"
+          type="button"
+        >
+          {{ 'PRODUCT_DESCRIPTION' | translate }}
+        </button>
+
+        <button
+          class="flex-1 py-5 px-6 font-medium text-gray-500 transition-all duration-200 border-b-3 border-transparent hover:bg-green-50 hover:text-green-500 border-l border-gray-200"
+          [class]="selectedTab === 'specifications' ? 'bg-white text-primary border-primary font-semibold' : ''"
+          (click)="changeTab('specifications')"
+          type="button"
+        >
+          {{ 'SPECIFICATIONS' | translate }}
+        </button>
+
+        <button
+          class="flex-1 py-5 px-6 font-medium text-gray-500 transition-all duration-200 border-b-3 border-transparent hover:bg-green-50 hover:text-green-500 border-l border-gray-200"
+          [class]="selectedTab === 'reviews' ? 'bg-whitetext-primary border-primary font-semibold' : ''"
+          (click)="changeTab('reviews')"
+          type="button"
+        >
+          {{ 'REVIEWS' | translate }}
+        </button>
+      </div>
+
+       
+      <div class="p-8 min-h-[300px]">
+         
+        <div class="animate-fade-in" *ngIf="selectedTab === 'description'">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-5 pb-3 border-b-2 border-gray-200">
+            {{ 'PRODUCT_DESCRIPTION' | translate }}
+          </h3>
+          <p class="text-gray-600 text-lg leading-relaxed mb-6">{{ p.description }}</p>
+
+          <div class="mt-8" *ngIf="p.tags.length > 0">
+            <h4 class="text-xl font-semibold text-gray-800 mb-4">
+              {{ 'KEY_FEATURES' | translate }}
+            </h4>
+            <ul class="space-y-3">
+              <li 
+                *ngFor="let tag of p.tags" 
+                class="flex items-start gap-3 py-3 border-b border-gray-100 text-gray-600 leading-relaxed last:border-b-0"
+              >
+                <span class="text-primary font-semibold mt-0.5">✓</span>
+                <span>{{ tag }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+         
+        <div class="animate-fade-in" *ngIf="selectedTab === 'specifications'">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-5 pb-3 border-b-2 border-gray-200">
+            {{ 'TECHNICAL_SPECIFICATIONS' | translate }}
+          </h3>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="flex justify-between items-center p-5 bg-gray-50 rounded-xl border border-gray-200">
+              <span class="font-semibold text-gray-800">{{ 'BRAND' | translate }}:</span>
+              <span class="text-gray-600">{{ p.brand || 'N/A' }}</span>
+            </div>
+            <div class="flex justify-between items-center p-5 bg-gray-50 rounded-xl border border-gray-200">
+              <span class="font-semibold text-gray-800">{{ 'CATEGORY' | translate }}:</span>
+              <span class="text-gray-600">{{ p.category }}</span>
+            </div>
+            <div class="flex justify-between items-center p-5 bg-gray-50 rounded-xl border border-gray-200">
+              <span class="font-semibold text-gray-800">{{ 'WEIGHT' | translate }}:</span>
+              <span class="text-gray-600">{{ p.weight || 'N/A' }} kg</span>
+            </div>
+            <div class="flex justify-between items-center p-5 bg-gray-50 rounded-xl border border-gray-200" *ngIf="p.dimensions">
+              <span class="font-semibold text-gray-800">{{ 'DIMENSIONS' | translate }}:</span>
+              <span class="text-gray-600">
+                {{ p.dimensions.width }} x
+                {{ p.dimensions.height }} x
+                {{ p.dimensions.depth }} cm
+              </span>
+            </div>
+          </div>
+        </div>
+
+         
+        <div class="animate-fade-in" *ngIf="selectedTab === 'reviews'">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-5 pb-3 border-b-2 border-gray-200">
+            {{ 'CUSTOMER_REVIEWS' | translate }}
+          </h3>
+          <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-6">
+            <div class="flex items-center gap-4">
+              <span class="text-5xl font-bold text-green-500">{{ p.rating }}</span>
+              <div class="flex gap-1">
+                <span
+                  *ngFor="let star of getStarArray(p.rating || 0)"
+                  class="text-2xl"
+                  [class]="star === 1 ? 'text-yellow-400' : 'text-gray-300'"
+                >★</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center py-12 bg-gray-50 rounded-xl border border-gray-200">
+            <p class="text-gray-500 text-lg italic">
+              {{ 'NO_REVIEWS_YET' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     
+    <div class="mt-16 pt-12 border-t-2 border-gray-200">
+  <div class="flex justify-between items-center mb-8">
+    <h2 class="text-3xl font-bold text-gray-800 relative">
+      {{ 'RELATED_PRODUCTS' | translate }}
+    </h2>
+    <a
+      routerLink="/products"
+        class="bg-primary text-white py-2 px-4 rounded hover:bg-primary-dark transition text-sm cursor-pointer self-start sm:self-auto"
+    >
+      {{ 'VIEW_ALL' | translate }}
+    </a>
+  </div>
+
+  <p class="text-gray-500 mb-6">
+    {{ 'RELATED_PRODUCTS_SUBTITLE' | translate }}
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <app-product-card
+      *ngFor="let product of relatedProducts(); trackBy: trackByProductId"
+      [id]="product.id"
+      [imageUrl]="product.thumbnail"
+      [category]="product.category"
+      [title]="product.title"
+      [description]="product.description"
+      [price]="product.price"
+      [oldPrice]="product.oldPrice ?? 0"
+      [discount]="product.discountPercentage"
+      [isNew]="product.isNew ?? false"
+      class="transition-transform duration-300 hover:-translate-y-1"
+    ></app-product-card>
+  </div>
+</div>
+
+  </div>
+</div>
+

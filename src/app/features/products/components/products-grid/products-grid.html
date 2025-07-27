@@ -1,0 +1,21 @@
+<div 
+      class="grid gap-6" 
+      [ngClass]="{
+        'grid-cols-1': viewMode === 'list',
+        'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3': viewMode === 'grid'
+      }"
+    >
+      @for (product of products; track product.id) {
+        <app-product-card
+          [imageUrl]="product.thumbnail"
+          [id]="product.id"
+          [category]="product.category"
+          [title]="product.title"
+          [description]="product.description"
+          [price]="product.price"
+          [oldPrice]="product.oldPrice ?? 0"
+          [discount]="product.discountPercentage"
+          [isNew]="product.isNew ?? false"
+        ></app-product-card>
+      }
+    </div>

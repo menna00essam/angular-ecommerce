@@ -1,0 +1,26 @@
+<div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+      <span>
+        {{ 'products.showing' | translate }} 
+        {{ getDisplayRange() }} 
+        {{ 'products.of' | translate }} 
+        {{ totalProducts }} 
+        {{ 'products.productsCount' | translate }}
+      </span>
+      
+      <div class="flex gap-2">
+        <button 
+          class="p-2 rounded-md border" 
+          [class.bg-gray-200]="viewMode === 'grid'" 
+          (click)="onViewModeChange('grid')"
+        >
+          <i class="fas fa-th"></i>
+        </button>
+        <button 
+          class="p-2 rounded-md border" 
+          [class.bg-gray-200]="viewMode === 'list'" 
+          (click)="onViewModeChange('list')"
+        >
+          <i class="fas fa-list"></i>
+        </button>
+      </div>
+    </div>

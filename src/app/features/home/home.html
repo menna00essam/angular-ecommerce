@@ -1,0 +1,47 @@
+<div class="home-page">
+  <app-hero-section
+    (navigateToProducts)="onNavigateToProducts()"
+  ></app-hero-section>
+
+  <app-features-section></app-features-section>
+
+  <app-product-showcase-section></app-product-showcase-section>
+
+  @if (loading()) {
+    <app-products-skeleton
+      [viewMode]="'grid'"
+      [count]="8"
+    ></app-products-skeleton>
+  }
+
+  @if (error() && !loading()) {
+    <div class="text-center text-red-500 py-6">
+      <!-- <app-error
+        [title]="'home.errorTitle' | translate"
+        [subtitle]="error() || 'home.errorSubtitle' | translate"
+        [buttonText]="'home.retry' | translate"
+        (buttonClick)="onRetryLoading()"
+        icon="fas fa-exclamation-triangle"
+      ></app-error> -->
+    </div>
+  }
+
+  @if (!loading() && !error()) {
+    <app-featured-products-section
+      [products]="featuredProducts()"
+      (navigateToProducts)="onNavigateToProducts()"
+    ></app-featured-products-section>
+  }
+
+  <app-offers-section
+    (navigateToProducts)="onNavigateToProducts()"
+  ></app-offers-section>
+
+  @if (displayedCategories().length > 0) {
+    <app-categories-section
+      [categories]="displayedCategories()"
+      (navigateToCategory)="onNavigateToCategory($event)"
+      (navigateToProducts)="onNavigateToProducts()"
+    ></app-categories-section>
+  }
+</div>

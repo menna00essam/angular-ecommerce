@@ -1,0 +1,64 @@
+<div class="min-h-screen bg-gray-100 py-8">
+  <div class="container mx-auto px-4">
+    <nav class="mb-8 py-4 mt-2">
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a routerLink="/" class="text-primary font-medium transition-colors duration-200 hover:underline">
+          {{ 'login.home' | translate }}
+        </a>
+        <span class="text-gray-400 font-light">/</span>
+        <span class="text-gray-800 font-semibold">
+          {{ 'cart.title' | translate }}
+        </span>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container mx-auto px-4">
+    <div *ngIf="loading()">
+      <app-loader message="cart.loading"></app-loader>
+    </div>
+
+    <div *ngIf="error()" class="bg-white rounded shadow p-6 text-center">
+      <p class="text-red-600 font-semibold mb-4">{{ error() }}</p>
+      <button mat-flat-button color="warn" (click)="continueShopping()">
+        {{ 'cart.continueShopping' | translate }}
+      </button>
+    </div>
+
+    <div *ngIf="isEmpty() && !loading() && !error()">
+      <app-cart-empty (continueShopping)="continueShopping()"></app-cart-empty>
+    </div>
+
+    <div *ngIf="!isEmpty() && !loading()" class="grid md:grid-cols-3 gap-6">
+      <div class="md:col-span-2">
+        <app-cart-items
+          [items]="items()"
+          [isUpdating]="isUpdating()"
+          (clearCart)="clearCart()"
+          (increaseQuantity)="increaseQuantity($event)"
+          (decreaseQuantity)="decreaseQuantity($event)"
+          (removeItem)="removeItem($event)"
+          (quantityChange)="onQuantityInputChange($event.productId, $event.event)"
+          (goToProduct)="goToProduct($event)"
+          [getMaxQuantity]="getMaxQuantity()"
+          [getItemTotal]="getItemTotal.bind(this)"
+          [trackByProductId]="trackByProductId.bind(this)">
+        </app-cart-items>
+      </div>
+
+      <div class="sticky top-10">
+        <app-cart-summary
+          [subtotal]="subtotal()"
+          [shipping]="shipping()"
+          [tax]="tax()"
+          [finalTotal]="finalTotal()"
+          [isEmpty]="isEmpty()"
+          [isUpdating]="isUpdating()"
+          [formatPrice]="formatPrice.bind(this)"
+          (proceedToCheckout)="proceedToCheckout()"
+          (continueShopping)="continueShopping()">
+        </app-cart-summary>
+      </div>
+    </div>
+  </div>
+</div>

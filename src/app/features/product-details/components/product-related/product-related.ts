@@ -1,0 +1,54 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ProductCard } from '../../../../shared/components/product-card/product-card';
+import { Product } from '../../../../core/models/product.model';
+
+@Component({
+  selector: 'app-product-related',
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, ProductCard],
+  template: `
+    <div class="mt-16 pt-12 border-t-2 border-gray-200">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-800 relative">
+          {{ 'RELATED_PRODUCTS' | translate }}
+        </h2>
+        <a
+          routerLink="/products"
+          class="bg-primary text-white py-2 px-4 rounded hover:bg-primary-dark transition text-sm cursor-pointer self-start sm:self-auto"
+        >
+          {{ 'VIEW_ALL' | translate }}
+        </a>
+      </div>
+
+      <p class="text-gray-500 mb-6">
+        {{ 'RELATED_PRODUCTS_SUBTITLE' | translate }}
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <app-product-card
+          *ngFor="let product of relatedProducts; trackBy: trackByProductId"
+          [id]="product.id"
+          [imageUrl]="product.thumbnail"
+          [category]="product.category"
+          [title]="product.title"
+          [description]="product.description"
+          [price]="product.price"
+          [oldPrice]="product.oldPrice ?? 0"
+          [discount]="product.discountPercentage"
+          [isNew]="product.isNew ?? false"
+          class="transition-transform duration-300 hover:-translate-y-1"
+        ></app-product-card>
+      </div>
+    </div>
+  `
+})
+export class ProductRelated {
+  @Input() relatedProducts: Product[] = [];
+
+  trackByProductId(index: number, product: Product): number {
+    return product.id;
+  }
+}

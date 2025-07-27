@@ -1,0 +1,58 @@
+<div class="w-full h-[500px] flex flex-col justify-between rounded-md overflow-hidden shadow-sm bg-surface">
+  <div (click)="goToDetails()" class="cursor-pointer flex-1 overflow-hidden">
+    <div class="relative w-[282px] h-[228px]">
+      <img [src]="imageUrl" alt="Product Image" class="w-full h-full object-cover rounded-t-md" />
+
+      <div
+        *ngIf="discount > 0 || isNew"
+        class="absolute top-2 left-2 text-xs font-semibold text-white px-3 py-1 rounded-md"
+        [ngClass]="{
+          'bg-danger': discount > 0,
+          'bg-primary': discount <= 0 && isNew
+        }"
+      >
+        {{ discount > 0 ? ('product.discount' | translate:{ value: discount }) : ('product.new' | translate) }}
+      </div>
+    </div>
+
+    <div class="px-4 pt-2 text-sm text-text-secondary truncate">{{ category }}</div>
+
+    <div class="px-4 pt-1 pb-2">
+      <h3 class="text-base font-bold text-text-primary truncate">{{ title }}</h3>
+
+      <p class="text-sm text-text-secondary line-clamp-2">
+        {{ description }}
+      </p>
+
+      <div class="flex items-center gap-2 mt-2">
+        <span class="text-base font-bold text-text-primary">
+  {{ price | priceFormat }}
+</span>
+<span *ngIf="oldPrice" class="text-sm line-through text-gray-600">
+  {{ oldPrice | priceFormat }}
+</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between px-4 py-3 gap-2">
+    <button
+      class="flex-1 h-[56px] border border-border rounded-sm text-sm font-medium hover:bg-primary hover:text-white transition"
+      (click)="handleAddToCart($event)"
+    >
+      {{ 'product.add_to_cart' | translate }}
+    </button>
+
+    <button
+      class="w-[50px] h-[56px] border border-border rounded-sm flex items-center justify-center text-lg transition"
+      [ngClass]="{
+        'text-danger': isFavorite,
+        'hover:text-danger': !isFavorite
+      }"
+      (click)="toggleFavorite(); $event.stopPropagation()"
+      aria-label="Add to favorites"
+    >
+      <i [class]="isFavorite ? 'fas fa-heart' : 'far fa-heart'"></i>
+    </button>
+  </div>
+</div>

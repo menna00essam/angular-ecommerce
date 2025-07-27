@@ -1,0 +1,50 @@
+:root {
+  --primary-color: #62D0B6;
+  --accent-color: #ff4081;
+  --warn-color: #f44336;
+  --background-color: #ffffff;
+  --surface-color: #ffffff;;
+  --text-primary: rgba(0, 0, 0, 0.87);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --border-color: #EEEEEE;
+  --black-color: #1D1F1F;
+   --danger-color: #f44336;
+  --gray-300: #E0E0E0;
+  --gray-600: #757575;
+
+}
+
+.dark {
+  --primary-color: #3ABFA3;
+  --accent-color: #7c4dff;
+  --warn-color: #ff5252;
+  --background-color: #222224;
+  --surface-color: #382d67;      
+  --text-primary: rgba(255, 255, 255, 0.87);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --border-color: #444444;
+  --black-color: #ffffff;
+   --danger-color: #ff5252;
+  --gray-300: #666666;
+  --gray-600: #999999;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .nav-links {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .action-buttons {
+  flex-direction: row-reverse;
+}

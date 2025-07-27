@@ -1,0 +1,136 @@
+<footer class="bg-[var(--bg)] text-[var(--text)] pt-10 border-t border-[var(--border)] transition-colors duration-300">
+  <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-start">
+    <div>
+      <h2 class="text-xl font-bold mb-2">{{ 'FOOTER.OUR_STORE' | translate }}</h2>
+      <p class="text-sm leading-6 text-[var(--text-secondary)]">
+        {{ 'FOOTER.OUR_STORE_DESC' | translate }}
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2">{{ 'FOOTER.MY_ACCOUNT' | translate }}</h2>
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a routerLink="/account" class="flex items-center gap-1 hover:text-[var(--primary-color)] transition-transform hover:translate-x-1">
+            <span>«</span> {{ 'FOOTER.ACCOUNT' | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/orders" class="flex items-center gap-1 hover:text-[var(--primary-color)] transition-transform hover:translate-x-1">
+            <span>«</span> {{ 'FOOTER.ORDERS' | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/cart" class="flex items-center gap-1 hover:text-[var(--primary-color)] transition-transform hover:translate-x-1">
+            <span>«</span> {{ 'FOOTER.CART' | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/favorites" class="flex items-center gap-1 hover:text-[var(--primary-color)] transition-transform hover:translate-x-1">
+            <span>«</span> {{ 'FOOTER.FAVORITES' | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2">{{ 'FOOTER.IMPORTANT_LINKS' | translate }}</h2>
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a routerLink="/about" class="flex items-center gap-1 hover:text-[var(--primary-color)] transition-transform hover:translate-x-1">
+            <span>«</span> {{ 'FOOTER.ABOUT_US' | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/privacy" class="flex items-center gap-1 hover:text-[var(--primary-color)] transition-transform hover:translate-x-1">
+            <span>«</span> {{ 'FOOTER.PRIVACY' | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/terms" class="flex items-center gap-1 hover:text-[var(--primary-color)] transition-transform hover:translate-x-1">
+            <span>«</span> {{ 'FOOTER.TERMS' | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/support" class="flex items-center gap-1 hover:text-[var(--primary-color)] transition-transform hover:translate-x-1">
+            <span>«</span> {{ 'FOOTER.SUPPORT' | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2">{{ 'FOOTER.CONTACT_US' | translate }}</h2>
+      <ul class="text-sm space-y-3 mb-4">
+        <li>
+          <div class="flex flex-col">
+            <span class="text-xs text-[var(--text-secondary)]">{{ 'FOOTER.WHATSAPP' | translate }}</span>
+            <span>009612345678932</span>
+          </div>
+        </li>
+        <li>
+          <div class="flex flex-col">
+            <span class="text-xs text-[var(--text-secondary)]">{{ 'FOOTER.MOBILE' | translate }}</span>
+            <span>009612345678932</span>
+          </div>
+        </li>
+        <li>
+          <div class="flex flex-col">
+            <span class="text-xs text-[var(--text-secondary)]">{{ 'FOOTER.EMAIL' | translate }}</span>
+            <a href="https://salla.sa" target="_blank" class="hover:underline text-[var(--text)]">https://salla.sa</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2">{{ 'FOOTER.FOLLOW_US' | translate }}</h2>
+      <div class="flex flex-wrap gap-3 mt-3">
+        <a href="#" class="group w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center transition-all duration-200 hover:border-[var(--primary-color)]">
+          <i class="fab fa-facebook-f text-[var(--text-secondary)] group-hover:text-[var(--primary-color)] text-xl"></i>
+        </a>
+        <a href="#" class="group w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center transition-all duration-200 hover:border-[var(--primary-color)]">
+          <i class="fab fa-twitter text-[var(--text-secondary)] group-hover:text-[var(--primary-color)] text-xl"></i>
+        </a>
+        <a href="#" class="group w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center transition-all duration-200 hover:border-[var(--primary-color)]">
+          <i class="fab fa-instagram text-[var(--text-secondary)] group-hover:text-[var(--primary-color)] text-xl"></i>
+        </a>
+        <a href="#" class="group w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center transition-all duration-200 hover:border-[var(--primary-color)]">
+          <i class="fab fa-snapchat text-[var(--text-secondary)] group-hover:text-[var(--primary-color)] text-xl"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+   
+  <div class="bg-[var(--black-color)] text-[var(--surface-color)] text-sm py-4 px-4 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+      <p class="text-center sm:text-start w-full sm:w-auto">
+        2023 &#64; {{ 'FOOTER.COPYRIGHT' | translate }}
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 w-full sm:w-auto justify-center sm:justify-end">
+
+        <div class="flex items-center gap-2">
+          <img src="assets/images/vat.jpg" alt="vat" class="h-6">
+          <p>{{ 'FOOTER.ADMIN_LOCATION' | translate }}: 546987552</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="bg-[var(--background-color)] p-1 rounded-md">
+            <img src="assets/images/visa.png" alt="Visa" class="h-6">
+          </div>
+          <div class="bg-[var(--background-color)] p-1 rounded-md">
+            <img src="assets/images/mastercard.png" alt="MasterCard" class="h-6">
+          </div>
+          <div class="bg-[var(--background-color)] p-1 rounded-md">
+            <img src="assets/images/paypal.png" alt="PayPal" class="h-6">
+          </div>
+          <div class="bg-[var(--background-color)] p-1 rounded-md">
+            <img src="assets/images/mada.png" alt="mada" class="h-6">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

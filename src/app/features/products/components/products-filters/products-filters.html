@@ -1,0 +1,121 @@
+<div class="space-y-6">
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold">{{ 'products.sortBy' | translate }}</h3>
+        <select 
+          [(ngModel)]="sortBy" 
+          (change)="onFiltersChange()" 
+          class="w-full border border-gray-300 rounded-md p-2"
+        >
+          <option value="">{{ 'products.default' | translate }}</option>
+          <option value="price-asc">{{ 'products.priceAsc' | translate }}</option>
+          <option value="price-desc">{{ 'products.priceDesc' | translate }}</option>
+          <option value="rating-desc">{{ 'products.ratingDesc' | translate }}</option>
+          <option value="title-asc">{{ 'products.titleAsc' | translate }}</option>
+        </select>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold">{{ 'products.category' | translate }}</h3>
+        <div class="space-y-1">
+          <label class="flex items-center gap-2">
+            <input 
+              type="radio" 
+              name="category" 
+              value="" 
+              [(ngModel)]="selectedCategory" 
+              (change)="onFiltersChange()" 
+            />
+            <span>{{ 'products.all' | translate }} ({{ totalProducts }})</span>
+          </label>
+
+          @for (category of categories; track category.slug; let i = $index) {
+            @if (categoriesExpanded || i < 5) {
+              <label class="flex items-center gap-2">
+                <input 
+                  type="radio" 
+                  name="category" 
+                  [value]="category.slug" 
+                  [(ngModel)]="selectedCategory" 
+                  (change)="onFiltersChange()" 
+                />
+                <span>{{ category.name }} ({{ getCategoryCount(category.slug) }})</span>
+              </label>
+            }
+          }
+
+          @if (categories.length > 5) {
+            <button 
+              class="text-sm text-primary underline" 
+              (click)="toggleCategoriesExpanded()"
+            >
+              {{ categoriesExpanded ? ('products.showLess' | translate) : ('products.showMore' | translate) }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold">{{ 'products.price' | translate }}</h3>
+        <div class="flex items-center gap-2">
+          <input 
+            type="number" 
+            [(ngModel)]="minPrice" 
+            (input)="onPriceChange()" 
+            [placeholder]="'products.from' | translate" 
+            class="w-full border p-2 rounded-md" 
+          />
+          <span>{{ 'products.to' | translate }}</span>
+          <input 
+            type="number" 
+            [(ngModel)]="maxPrice" 
+            (input)="onPriceChange()" 
+            [placeholder]="'products.to' | translate" 
+            class="w-full border p-2 rounded-md" 
+          />
+        </div>
+        <div class="text-sm text-gray-600">
+          {{ minPrice || 0 }} ر.س - {{ maxPrice || 50000 }} ر.س
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold">{{ 'products.rating' | translate }}</h3>
+        <div class="space-y-1">
+          @for (rating of ratingOptions; track rating) {
+            <label class="flex items-center gap-2">
+              <input 
+                type="radio" 
+                name="rating" 
+                [value]="rating" 
+                [(ngModel)]="selectedRating" 
+                (change)="onFiltersChange()" 
+              />
+              <div class="flex items-center gap-1">
+                @for (star of getStars(rating); track $index) {
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                }
+                @if (rating < 5) {
+                  @for (emptyStar of getEmptyStars(rating); track $index) {
+                    <i class="far fa-star text-gray-300 text-sm"></i>
+                  }
+                }
+                <span class="text-sm">({{ getRatingProductCount(rating) }})</span>
+              </div>
+            </label>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button 
+          class="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-md" 
+          (click)="onResetFilters()"
+        >
+          {{ 'products.reset' | translate }}
+        </button>
+      </div>
+
+      <div>
+        <img src="assets/images/Beauty.jpg" alt="Beauty" />
+      </div>
+    </div>

@@ -1,0 +1,54 @@
+    <section class="w-full h-screen relative overflow-hidden">
+      <div class="absolute inset-0 transition-transform duration-700 ease-in-out"
+           [style.transform]="'translateX(-' + currentSlide() * 100 + '%)'">
+        <div class="flex w-full h-full">
+          <div *ngFor="let slide of heroSlides; let i = index"
+               class="w-full flex-shrink-0 relative h-screen">
+            
+            <div class="absolute inset-0 bg-black/50 z-10"></div>
+            
+            <img [src]="slide.imageUrl"
+                 [alt]="('heroSlides.' + i + '.title') | translate"
+                 class="w-full h-full object-cover" />
+            
+            <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
+              <h1 class="text-3xl md:text-5xl font-bold mb-4">
+                {{ ('heroSlides.' + i + '.title') | translate }}
+              </h1>
+              <p class="text-lg md:text-xl mb-6 opacity-90">
+                {{ ('heroSlides.' + i + '.description') | translate }}
+              </p>
+              
+              <button class="bg-[var(--primary-color)] text-white px-6 py-3 rounded-md hover:opacity-90 transition"
+                      (click)="onButtonClick()">
+                {{ ('heroSlides.' + i + '.buttonText') | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="absolute top-1/2 left-6 z-30 transform -translate-y-1/2 
+                    bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition"
+              (click)="previousSlide()">
+        <mat-icon class="text-[var(--primary-color)] text-3xl">chevron_left</mat-icon>
+      </button>
+
+      <button class="absolute top-1/2 right-6 z-30 transform -translate-y-1/2 
+                    bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition"
+              (click)="nextSlide()">
+        <mat-icon class="text-[var(--primary-color)] text-3xl">chevron_right</mat-icon>
+      </button>
+
+      <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
+        <button *ngFor="let slide of heroSlides; let i = index"
+                class="w-3 h-3 rounded-full transition-all duration-300"
+                [ngClass]="{
+                  'bg-[var(--primary-color)]': currentSlide() === i,
+                  'bg-[var(--primary-color)]/50': currentSlide() !== i
+                }"
+                (click)="goToSlide(i)"
+                [attr.aria-label]="'Go to slide ' + (i + 1)">
+        </button>
+      </div>
+    </section>

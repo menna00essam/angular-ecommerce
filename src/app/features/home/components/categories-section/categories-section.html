@@ -1,0 +1,41 @@
+<section class="container py-10 px-4 min-h-[300px]">
+      <div class="flex items-center justify-between mb-6 ">
+        <h2 class="text-2xl font-bold text-[var(--text-primary)]">
+          {{ 'categories.title' | translate }}
+        </h2>
+        <button class="bg-[var(--primary-color)] text-white py-2 px-4 rounded">
+          {{ 'categories.viewAll' | translate }}
+        </button>
+      </div>
+
+      @if (categories.length > 0) {
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-4">
+          <div
+            *ngFor="let category of categories"
+            class="text-center cursor-pointer group"
+            (click)="onCategoryClick(category.slug)"
+          >
+            <div
+              class="w-20 h-20 mx-auto rounded-full overflow-hidden border group-hover:shadow-md transition"
+            >
+              <img
+                [src]="
+                  categoryImages[category.name] ||
+                  'assets/images/categories/default.jpg'
+                "
+                [alt]="category.name"
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <div class="mt-2 text-sm text-[var(--text-secondary)]">
+              {{ category.name | translate }}
+            </div>
+          </div>
+        </div>
+      } @else {
+        <div class="text-center py-8 text-[var(--text-secondary)]">
+          <p>{{ 'categories.noCategories' | translate }}</p>
+        </div>
+      }
+    </section>

@@ -1,0 +1,10 @@
+.not-found-container {
+  text-align: center;
+  padding: 3rem;
+  color: #555;
+}
+
+.not-found-container img {
+  max-width: 300px;
+  margin-bottom: 1rem;
+}

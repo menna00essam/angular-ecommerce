@@ -1,0 +1,248 @@
+{
+"NAVBAR": {
+      "LOGO": "متجر",
+      "STORE": "متجـــــر",
+      "BASKET": "سلــــــة",
+      "HOME": "الرئيسية",
+      "PRODUCTS": "المنتجات", 
+      "CART": "سلة المشتريات",
+      "CONTACT": "تواصل معنا",
+      "RETURN_POLICY": "سياسة الإستبدال أو الاسترجاع",
+      "FAVORITES": "المفضلة",
+      "SEARCH_PLACEHOLDER": "ابحث عما تريد",
+      "WELCOME": "مرحبا بك",
+      "LOGIN": "تسجيل دخول",
+      "REGISTER": "تسجيل جديد",
+      "LOGOUT": "تسجيل خروج",
+      "TOGGLE_THEME": "تبديل المظهر",
+      "PROFILE": "الملف الشخصي",
+      "ORDERS": "طلباتي"
+    },
+    "CATEGORIES": {
+      "ELECTRONICS": "إلكترونيات",
+      "MONITORS": "شاشات كمبيوتر",
+      "ACCESSORIES": "أكسسوارات", 
+      "CAMERAS": "كاميرات رقمية",
+      "HEADPHONES": "سماعات رقمية",
+      "SECURITY": "كاميرات مراقبة",
+      "PHONES": "موبايلات", 
+      "ALL_PRODUCTS": "كل المنتجات"
+    },
+"login": {
+  "title": "لديك حساب؟ سجّل الدخول",
+  "description": "قم بتسجيل الدخول حتى تتبع طلباتك وتصل بسهولة إلى قائمة مفضلاتك.",
+  "usernameLabel": "البريد الإلكتروني",
+  "usernamePlaceholder": "بريدك الإلكتروني",
+  "usernameAlt": "نص بديل لوصف حقل الإدخال",
+    "noAccount": "ليس لديك حساب؟",
+    "loginDescription": "قم بتسجيل الدخول لتتبع طلباتك والوصول بسهولة إلى قائمة المفضلات الخاصة بك.",
+    "home":"الرئيسية",
+    "log":"سجيل الدخول"
+
+
+,
+  
+  "passwordLabel": "كلمة المرور",
+  "passwordPlaceholder": "********",
+  "passwordAlt": "نص بديل لمعلومات الحقل",
+  
+  "rememberMe": "تذكرني",
+  
+  "buttonText": "تسجيل الدخول",
+  "registerLink": "إنشاء حساب جديد"
+}
+
+,
+ "register": {
+    "title": "جديد معنا؟ سجل الآن",
+    "description": "يتيح لك التسجيل في هذا الموقع الوصول إلى حالة طلبك وسجله. ما عليك سوى ملء الحقول أدناه ، وسنقوم بإنشاء حساب جديد لك في أسرع وقت.",
+    "usernameLabel": "الاسم",
+    "usernamePlaceholder": "الاسم الأول",
+    "usernameRequired": "هذا الحقل مطلوب.",
+    "usernameMinLength": "مطلوب على الأقل 3 أحرف.",
+    
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "بريدك الإلكتروني",
+    "emailRequired": "هذا الحقل مطلوب.",
+    "emailInvalid": "يرجى إدخال بريد إلكتروني صالح.",
+    
+    "passwordLabel": "كلمة المرور",
+    "passwordPlaceholder": "كلمة المرور",
+    "passwordRequired": "هذا الحقل مطلوب.",
+    "passwordMinLength": "مطلوب على الأقل 6 أحرف.",
+    
+    "confirmPasswordLabel": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+    "confirmPasswordRequired": "هذا الحقل مطلوب.",
+    "passwordsMismatch": "كلمات المرور غير متطابقة.",
+    
+    "buttonText": "إنشاء حساب",
+    "loadingText": "جاري إنشاء الحساب...",
+    
+    "haveAccount": "هل لديك حساب؟",
+    "loginLink": "تسجيل الدخول"
+  }
+  ,
+  "FOOTER": {
+    "OUR_STORE": "متجرنا",
+    "OUR_STORE_DESC": "متجر سلة من افضل المتاجر التى تقوم ببيع المنتجات الرقمية بأفضل الأسعار وماركات عالمية. تسوق الآن واطلع على المزيد من التصاميم واستمتع بأفضل العروض والخصومات.",
+    "MY_ACCOUNT": "حسابي",
+    "ACCOUNT": "حسابي",
+    "ORDERS": "طلباتي",
+    "CART": "سلة المشتريات",
+    "FAVORITES": "المفضلة",
+    "IMPORTANT_LINKS": "روابط مهمة",
+    "ABOUT_US": "من نحن",
+    "PRIVACY": "سياسة الخصوصية",
+    "TERMS": "الشروط والأحكام",
+    "SUPPORT": "الدعم الفني",
+    "CONTACT_US": "تواصل معنا",
+    "WHATSAPP": "واتساب",
+    "MOBILE": "موبايل",
+    "EMAIL": "البريد",
+    "FOLLOW_US": "تابعنا على",
+    "COPYRIGHT": "جميع الحقوق محفوظة لمنصة سلة",
+    "ADMIN_LOCATION": "مقر الإدارة",
+    "PAYMENT_METHODS": "طرق الدفع"
+  },
+  "product": {
+    "discount": "خصم {{value}}%",
+    "new": "جديد",
+    "add_to_cart": "أضف للسلة"
+  },
+  "heroSlides": {
+    "0": {
+      "title": "أفضل التخفيضات 2024",
+      "description": "متجر سلة يوفر لك كل ما تحتاجه من إلكترونيات إلى أثاث منزلي. تسوق الآن واستمتع بالتخفيضات المميزة.",
+      "buttonText": "اكتشف المزيد"
+    },
+    "1": {
+      "title": "منتجات حصرية",
+      "description": "اكتشف مجموعتنا الحصرية مع أفضل الأسعار والجودة العالية.",
+      "buttonText": "تسوق الآن"
+    },
+    "2": {
+      "title": "عروض محدودة",
+      "description": "لا تفوت عروضنا المحدودة على أفضل المنتجات.",
+      "buttonText": "استكشف العروض"
+    }
+  },
+  "features": {
+    "freeShipping": {
+      "title": "شحن مجاني",
+      "description": "لكل الطلبات فوق 200 ر.س"
+    },
+    "easyReturns": {
+      "title": "إرجاع سهل",
+      "description": "خلال 14 يومًا من الشراء"
+    },
+    "securePayments": {
+      "title": "مدفوعات آمنة",
+      "description": "نستخدم أعلى معايير الأمان"
+    }
+  },
+  "home": {
+    "featured_products": "المنتجات المميزة",
+    "view_more": "عرض المزيد"
+  },
+  "section": {
+    "title": "سماعات ديجيتال",
+    "desc": "أفضل صوت نقي",
+    "shopNow": "تسوق الآن"
+  },
+   "offers": {
+    "title": "أفضل التخفيضات 2022",
+    "description": "متجر سلة يوفر لك كل ما تحتاجه من إلكترونيات أو أثاث منزلي بالإضافة إلى أفضل التخفيضات على المنتجات، تسوق الآن واستمتع بالتخفيضات.",
+    "cta": "اكتشف المزيد"
+  },
+  "categories": {
+    "title": "تسوق حسب الفئات",
+    "viewAll": "عرض الكل"
+  },
+  "Beauty": "الجمال",
+  "Fragrances": "العطور",
+  "Furniture": "الأثاث",
+  "Groceries": "البقالة",
+  "Home Decoration": "ديكور المنزل",
+  "Kitchen Accessories": "مستلزمات المطبخ",
+  "products": {
+    "title": "المنتجات",
+    "sortBy": "الترتيب حسب",
+    "default": "الافتراضي",
+    "priceAsc": "السعر: من الأقل إلى الأعلى",
+    "priceDesc": "السعر: من الأعلى إلى الأقل",
+    "ratingDesc": "التقييم: الأعلى أولاً",
+    "titleAsc": "الاسم: أ إلى ي",
+    "category": "الفئة",
+    "all": "الكل",
+    "showMore": "عرض المزيد",
+    "showLess": "عرض أقل",
+    "price": "السعر",
+    "from": "من",
+    "to": "إلى",
+    "rating": "التقييم",
+    "reset": "إعادة ضبط",
+    "loading": "جاري تحميل المنتجات...",
+    "retry": "إعادة المحاولة",
+    "noProductsTitle": "لم يتم العثور على منتجات",
+    "noProductsSubtitle": "جرب تغيير معايير البحث أو إعادة ضبط الفلاتر",
+    "resetFilters": "إعادة ضبط الفلاتر",
+    "showing": "عرض",
+    "of": "من",
+    "productsCount": "منتج",
+    "previous": "السابق",
+    "next": "التالي",
+    "page": "صفحة",
+    "ofPages": "من",
+    "total": "إجمالي"
+  },
+  "LOADING": "جاري التحميل...",
+    "ERROR_OCCURRED": "حدث خطأ",
+    "BACK_TO_PRODUCTS": "العودة للمنتجات",
+    "HOME": "الرئيسية",
+    "PRODUCTS": "المنتجات",
+    "NEW": "جديد",
+    "BRAND": "العلامة التجارية",
+    "REVIEWS": "التقييمات",
+    "YOU_SAVE": "توفر",
+    "IN_STOCK": "متوفر في المخزن",
+    "OUT_OF_STOCK": "غير متوفر",
+    "QUANTITY": "الكمية",
+    "ADD_TO_CART": "إضافة للسلة",
+    "FREE_RETURNS": "إرجاع مجاني 30 يوم",
+    "PRODUCT_WARRANTY": "ضمان المنتج",
+    "SHARE_PRODUCT": "مشاركة المنتج",
+    "PAYMENT_OPTIONS": "خيارات الدفع",
+    "INSTALLMENT_PAYMENT": "الدفع بالتقسيط",
+    "INSTALLMENT_DESCRIPTION": "قسط مشترياتك على 4 أقساط بدون فوائد",
+    "LEARN_MORE": "اعرف أكثر",
+    "PRODUCT_DESCRIPTION": "وصف المنتج",
+    "SPECIFICATIONS": "المواصفات",
+    "TECHNICAL_SPECIFICATIONS": "المواصفات الفنية",
+    "CATEGORY": "الفئة",
+    "WEIGHT": "الوزن",
+    "DIMENSIONS": "الأبعاد",
+    "CUSTOMER_REVIEWS": "تقييمات العملاء",
+    "NO_REVIEWS_YET": "لا توجد تقييمات حالياً",
+    "KEY_FEATURES": "المميزات الرئيسية",
+     "RELATED_PRODUCTS": "منتجات مشابهة",
+  "VIEW_ALL": "عرض الكل",
+  "RELATED_PRODUCTS_SUBTITLE": "تسوق أحدث المنتجات المميزة المضافة حديثًا",
+  "cart.title": "Shopping Cart",
+  "cart.items": "items",
+  "cart.loading": "Loading...",
+  "cart.emptyTitle": "Your cart is empty",
+  "cart.emptySubtitle": "Start shopping now and add your favorite products",
+  "cart.startShopping": "Start Shopping",
+  "cart.continueShopping": "Continue Shopping",
+  "cart.clearCart": "Clear Cart",
+  "cart.products": "Products",
+  "cart.total": "Total",
+  "cart.subtotal": "Subtotal",
+  "cart.shipping": "Shipping",
+  "cart.freeShipping": "Free",
+  "cart.tax": "Tax",
+  "cart.summary": "Order Summary",
+  "cart.checkout": "Proceed to Checkout",
+  "cart.freeShippingNotice": "Add {{amount}} more for free shipping"
+}

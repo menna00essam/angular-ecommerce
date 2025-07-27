@@ -1,0 +1,13 @@
+<div class="text-center text-gray-500 py-10">
+      <i [class]="icon" class="text-3xl"></i>
+      <h3 class="mt-2 text-lg">{{ title }}</h3>
+      <p class="text-sm mb-4">{{ subtitle }}</p>
+      @if (buttonText) {
+        <button 
+          class="bg-primary text-white py-2 px-4 rounded" 
+          (click)="onButtonClick()"
+        >
+          {{ buttonText }}
+        </button>
+      }
+    </div>

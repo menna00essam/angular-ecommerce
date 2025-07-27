@@ -1,0 +1,91 @@
+<div class="products-page container mx-auto px-4 py-6">
+  <nav class="mb-8 py-4 mt-2">
+    <div class="flex items-center space-x-3 rtl:space-x-reverse">
+      <a 
+        routerLink="/" 
+        class="text-primary font-medium transition-colors duration-200 hover:underline"
+      >
+        {{ 'login.home' | translate }}
+      </a>
+      <span class="text-gray-400 font-light">/</span>
+      <span class="text-gray-800 font-semibold">
+        {{ 'products.title' | translate }}
+      </span>
+    </div>
+  </nav>
+
+  <div class="flex flex-col lg:flex-row gap-6">
+    <aside class="w-full lg:w-1/4">
+      <app-products-filters
+        [categories]="categories()"
+        [totalProducts]="totalProducts()"
+        [selectedCategory]="selectedCategory"
+        [sortBy]="sortBy"
+        [minPrice]="minPrice"
+        [maxPrice]="maxPrice"
+        [selectedRating]="selectedRating"
+        (filtersChange)="onFiltersChange($event)"
+        (resetFilters)="resetFilters()"
+      ></app-products-filters>
+    </aside>
+
+    <main class="w-full lg:w-3/4 pt-0">
+      <app-products-header
+        [totalProducts]="totalProducts()"
+        [currentPage]="currentPage"
+        [productsPerPage]="productsPerPage"
+        [viewMode]="viewMode"
+        (viewModeChange)="onViewModeChange($event)"
+      ></app-products-header>
+
+      @if (loading()) {
+        <app-products-skeleton
+          [viewMode]="viewMode"
+          [count]="productsPerPage"
+        ></app-products-skeleton>
+      }
+
+      @if (error() && !loading()) {
+        <div class="text-center text-red-500 py-6">
+          <i class="fas fa-exclamation-triangle text-2xl"></i>
+          <p class="mt-2">{{ error() }}</p>
+          <button 
+            class="mt-4 bg-primary text-white py-2 px-4 rounded" 
+            (click)="retryLoading()"
+          >
+            {{ 'products.retry' | translate }}
+          </button>
+        </div>
+      }
+
+      @if (!loading() && !error()) {
+        @if (products().length > 0) {
+          <app-products-grid
+            [products]="products()"
+            [viewMode]="viewMode"
+          ></app-products-grid>
+
+          <!-- Pagination -->
+          @if (totalProducts() > productsPerPage) {
+            <app-products-pagination
+              [currentPage]="currentPage"
+              [totalPages]="totalPages()"
+              [totalProducts]="totalProducts()"
+              [productsPerPage]="productsPerPage"
+              (pageChange)="onPageChange($event)"
+            ></app-products-pagination>
+          }
+        } @else {
+          <!-- Empty State -->
+          <app-empty
+            [title]="'products.noProductsTitle' | translate"
+            [subtitle]="'products.noProductsSubtitle' | translate"
+            [buttonText]="'products.resetFilters' | translate"
+            (buttonClick)="resetFilters()"
+            icon="fas fa-search"
+          ></app-empty>
+        }
+      }
+    </main>
+  </div>
+</div>
