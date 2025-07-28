@@ -4,11 +4,14 @@ import { Component, OnInit } from '@angular/core';
 import { ThemeService } from './core/services/theme.service';
 import { LanguageService } from './core/services/language.service';
 import { Footer } from "./shared/components/footer/footer";
+import { OfflineService } from './core/services/offline.service';
+import { AsyncPipe, NgIf } from '@angular/common';
+
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, Footer],
+  imports: [RouterOutlet, Navbar, Footer,NgIf,AsyncPipe],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
@@ -19,7 +22,8 @@ export class App implements OnInit {
 
   constructor(
     private themeService: ThemeService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    public offlineService: OfflineService
   ) {}
 
   ngOnInit() {

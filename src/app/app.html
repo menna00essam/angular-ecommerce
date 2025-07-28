@@ -1,4 +1,7 @@
  <app-navbar></app-navbar>
+ <div *ngIf="!(offlineService.isOnline$ | async)" class="offline-banner">
+   You are offline. Some features may not work.
+</div>
     <main>
       <router-outlet></router-outlet>
     </main>

@@ -3,39 +3,28 @@ import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import { BehaviorSubject, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class OfflineService {
   private isOnlineSubject = new BehaviorSubject<boolean>(navigator.onLine);
   public isOnline$ = this.isOnlineSubject.asObservable();
 
   constructor(private swUpdate: SwUpdate) {
-    this.monitorOnlineStatus();
-    
+    this.trackNetworkStatus();
     this.checkForUpdates();
   }
 
-  private monitorOnlineStatus(): void {
-    fromEvent(window, 'online').subscribe(() => {
-      this.isOnlineSubject.next(true);
-    });
-
-    fromEvent(window, 'offline').subscribe(() => {
-      this.isOnlineSubject.next(false);
-    });
+  private trackNetworkStatus() {
+    fromEvent(window, 'online').subscribe(() => this.isOnlineSubject.next(true));
+    fromEvent(window, 'offline').subscribe(() => this.isOnlineSubject.next(false));
   }
 
-  private checkForUpdates(): void {
+  private checkForUpdates() {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.versionUpdates
-        .pipe(
-          filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY')
-        )
+        .pipe(filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'))
         .subscribe(() => {
-          if (confirm('A new version is available. Do you want to reload the page?')) {
-            window.location.reload();
-          }
+          const confirmed = confirm('New version available! Reload to update?');
+          if (confirmed) window.location.reload();
         });
     }
   }

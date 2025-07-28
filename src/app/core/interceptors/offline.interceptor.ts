@@ -12,7 +12,7 @@ export function offlineInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): 
     if (cached) {
       return of(new HttpResponse({ status: 200, body: JSON.parse(cached) }));
     }
-    return throwError(() => new Error('No offline data available.'));
+    return throwError(() => new Error('No offline data found.'));
   }
 
   return next(req).pipe(
