@@ -1,4 +1,3 @@
-// components/categories-section/categories-section.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';

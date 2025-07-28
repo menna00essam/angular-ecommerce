@@ -1,4 +1,3 @@
-// components/featured-products-section/featured-products-section.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';

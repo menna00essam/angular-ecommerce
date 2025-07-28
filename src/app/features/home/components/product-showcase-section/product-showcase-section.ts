@@ -1,4 +1,3 @@
-// components/product-showcase-section/product-showcase-section.component.ts
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
