@@ -3,7 +3,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ProductService } from './product.service';
 import { Product, ProductsResponse, ProductFilter } from '../models/product.model';
 
-// Mock the product util function
 jest.mock('../utils/product.util', () => ({
   enrichProduct: jest.fn((product) => product)
 }));
@@ -13,7 +12,6 @@ describe('ProductService', () => {
   let httpMock: HttpTestingController;
   const baseUrl = 'https://dummyjson.com';
 
-  // Mock data
   const mockProducts: Product[] = [
     {
       id: 1,
