@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { CartService } from '../../core/services/cart.service';
 import { CartItem } from '../../core/models/cart.model';
@@ -24,8 +23,7 @@ import { CartEmpty } from './components/cart-empty/cart-empty';
   standalone: true,
   imports: [
     CommonModule, 
-    RouterModule, 
-    FormsModule,  
+    RouterModule,  
     MatProgressSpinnerModule,
     MatIconModule,
     MatCardModule,
