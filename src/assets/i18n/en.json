@@ -31,8 +31,8 @@
   "login": {
     "title": "Login to your account",
     "loginDescription": "Log in to track your orders and easily access your favorites list.",
-    "usernameLabel": "Email or Username",
-    "usernamePlaceholder": "Your email or username",
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "username",
     "usernameRequired": "This field is required.",
     "usernameMinLength": "Minimum 3 characters required.",
     "passwordLabel": "Password",
