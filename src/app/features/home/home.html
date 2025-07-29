@@ -14,18 +14,6 @@
     ></app-products-skeleton>
   }
 
-  @if (error() && !loading()) {
-    <div class="text-center text-red-500 py-6">
-      <!-- <app-error
-        [title]="'home.errorTitle' | translate"
-        [subtitle]="error() || 'home.errorSubtitle' | translate"
-        [buttonText]="'home.retry' | translate"
-        (buttonClick)="onRetryLoading()"
-        icon="fas fa-exclamation-triangle"
-      ></app-error> -->
-    </div>
-  }
-
   @if (!loading() && !error()) {
     <app-featured-products-section
       [products]="featuredProducts()"

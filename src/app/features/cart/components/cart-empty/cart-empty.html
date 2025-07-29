@@ -1,8 +1,24 @@
-    <div class="bg-white rounded shadow p-10 text-center">
-      <div class="text-5xl mb-4">🛒</div>
-      <h2 class="text-2xl font-semibold mb-2 text-gray-700">{{ 'cart.emptyTitle' | translate }}</h2>
-      <p class="text-gray-500 mb-6">{{ 'cart.emptySubtitle' | translate }}</p>
-      <button mat-flat-button color="primary" (click)="onContinueShopping()">
-        {{ 'cart.startShopping' | translate }}
-      </button>
-    </div>
+<div class="bg-white rounded shadow p-10 text-center">
+  <h2
+    class="text-2xl font-semibold mb-2 text-gray-700"
+    [attr.aria-label]="'cart.emptyTitle' | translate"
+  >
+    {{ 'cart.emptyTitle' | translate }}
+  </h2>
+
+  <p
+    class="text-gray-500 mb-6"
+    [attr.aria-label]="'cart.emptySubtitle' | translate"
+  >
+    {{ 'cart.emptySubtitle' | translate }}
+  </p>
+
+  <button
+    mat-flat-button
+    color="warn"
+    (click)="onContinueShopping()"
+    [attr.aria-label]="'cart.startShopping' | translate"
+  >
+    {{ 'cart.startShopping' | translate }}
+  </button>
+</div>

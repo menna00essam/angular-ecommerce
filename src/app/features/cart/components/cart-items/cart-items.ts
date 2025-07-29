@@ -5,11 +5,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { CartItem } from '../../../../core/models/cart.model';
 import { PriceFormatPipe } from '../../../../shared/pipes/price-format.pipe';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmClearDialog } from '../../../../shared/components/confirm-clear-dialog/confirm-clear-dialog';
+
 
 @Component({
   selector: 'app-cart-items',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, TranslateModule, PriceFormatPipe],
+  imports: [CommonModule, MatButtonModule, MatIconModule, TranslateModule, PriceFormatPipe,MatDialogModule],
    templateUrl: './cart-items.html',
   styleUrls: ['./cart-items.css']
  
@@ -28,8 +31,16 @@ export class CartItemsComponent {
   @Output() quantityChange = new EventEmitter<{productId: number, event: Event}>();
   @Output() goToProduct = new EventEmitter<number>();
 
-  onClearCart(): void {
-    this.clearCart.emit();
+  constructor(private dialog: MatDialog) {}
+
+onClearCart(): void {
+    const dialogRef = this.dialog.open(ConfirmClearDialog); 
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.clearCart.emit();
+      }
+    });
   }
 
   onIncreaseQuantity(productId: number): void {

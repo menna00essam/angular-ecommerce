@@ -1,15 +1,26 @@
-<div class="min-h-screen bg-gray-100 py-8">
+<div class="min-h-screen bg-gray-100 py-8" style="--primary-color: #3ABFA3;">
   <div class="container mx-auto px-4">
-    <nav class="mb-8 py-4 mt-2">
-      <div class="flex items-center space-x-3 rtl:space-x-reverse">
-        <a routerLink="/" class="text-primary font-medium transition-colors duration-200 hover:underline">
-          {{ 'login.home' | translate }}
-        </a>
-        <span class="text-gray-400 font-light">/</span>
-        <span class="text-gray-800 font-semibold">
-          {{ 'cart.title' | translate }}
-        </span>
-      </div>
+    <nav class="mb-8 py-4 mt-2" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-3 rtl:space-x-reverse" role="list">
+        <li>
+          <a
+            routerLink="/"
+            class="text-primary font-medium transition-colors duration-200 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2"
+            [style.color]="'var(--primary-color)'"
+            aria-label="Go to Home"
+          >
+            {{ 'login.home' | translate }}
+          </a>
+        </li>
+        <li aria-hidden="true">
+          <span class="text-gray-400 font-light">/</span>
+        </li>
+        <li aria-current="page">
+          <span class="text-gray-800 font-semibold">
+            {{ 'cart.title' | translate }}
+          </span>
+        </li>
+      </ol>
     </nav>
   </div>
 
@@ -18,14 +29,20 @@
       <app-loader message="cart.loading"></app-loader>
     </div>
 
-    <div *ngIf="error()" class="bg-white rounded shadow p-6 text-center">
+    <div *ngIf="error()" class="bg-white rounded shadow p-6 text-center" role="alert" aria-live="assertive">
       <p class="text-red-600 font-semibold mb-4">{{ error() }}</p>
-      <button mat-flat-button color="warn" (click)="continueShopping()">
+      <button
+        mat-flat-button
+        color="warn"
+        (click)="continueShopping()"
+        class="focus:outline-none focus:ring-2 focus:ring-offset-2"
+        aria-label="Continue Shopping after error"
+      >
         {{ 'cart.continueShopping' | translate }}
       </button>
     </div>
 
-    <div *ngIf="isEmpty() && !loading() && !error()">
+    <div *ngIf="isEmpty() && !loading() && !error()" aria-live="polite">
       <app-cart-empty (continueShopping)="continueShopping()"></app-cart-empty>
     </div>
 
@@ -42,7 +59,9 @@
           (goToProduct)="goToProduct($event)"
           [getMaxQuantity]="getMaxQuantity()"
           [getItemTotal]="getItemTotal.bind(this)"
-          [trackByProductId]="trackByProductId.bind(this)">
+          [trackByProductId]="trackByProductId.bind(this)"
+          aria-label="Cart Items Section"
+        >
         </app-cart-items>
       </div>
 
@@ -56,7 +75,9 @@
           [isUpdating]="isUpdating()"
           [formatPrice]="formatPrice.bind(this)"
           (proceedToCheckout)="proceedToCheckout()"
-          (continueShopping)="continueShopping()">
+          (continueShopping)="continueShopping()"
+          aria-label="Cart Summary Section"
+        >
         </app-cart-summary>
       </div>
     </div>

@@ -109,11 +109,10 @@ export class Cart implements OnInit, OnDestroy {
     this.cartService.removeFromCart(productId);
   }
 
-  clearCart(): void {
-    if (confirm('Are you sure you want to clear the cart?')) {
-      this.cartService.clearCart();
-    }
-  }
+clearCart(): void {
+  this.cartService.clearCart();
+}
+
 
   proceedToCheckout(): void {
     if (this.isEmpty()) return;

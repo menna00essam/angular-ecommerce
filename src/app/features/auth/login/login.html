@@ -1,4 +1,4 @@
-<nav class="mb-8 py-4 mt-2 container">
+<nav class="mb-8 py-4 mt-2 container" aria-label="breadcrumb">
   <div class="flex items-center space-x-3 rtl:space-x-reverse">
     <a 
       routerLink="/" 
@@ -6,19 +6,18 @@
     >
       {{ 'login.home' | translate }}
     </a>
-    <span class="text-gray-400 font-light">/</span>
-    <span class="text-gray-800 font-semibold">
+    <span class="text-gray-400 font-light" aria-hidden="true">/</span>
+    <span class="text-gray-800 font-semibold" aria-current="page">
       {{ 'login.log' | translate }}
     </span>
   </div>
 </nav>
 
+<div 
+  class="min-h-[calc(100vh-160px)] container flex flex-col md:flex-row items-center justify-center px-4 pt-0 pb-4 md:px-6 lg:px-8 font-inter max-w-6xl mx-auto bg-background text-natural dark:bg-background dark:text-natural"
+  role="main"
+>
 
-
-
-<div class="min-h-[calc(100vh-160px)] container flex flex-col md:flex-row items-center justify-center px-4 pt-0 pb-4 md:px-6 lg:px-8 font-inter max-w-6xl mx-auto bg-background text-natural dark:bg-background dark:text-natural">
-
-   
   <div class="w-full md:w-1/2 p-4 md:p-8 flex flex-col justify-center space-y-6">
 
     <h2 class="text-3xl md:text-4xl font-bold text-natural dark:text-white">
@@ -28,9 +27,13 @@
       {{ 'login.loginDescription' | translate }}
     </p>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-5">
+    <form 
+      [formGroup]="loginForm" 
+      (ngSubmit)="onSubmit()" 
+      class="space-y-4 md:space-y-5"
+      aria-labelledby="login-title"
+    >
 
-       
       <div>
         <label for="usernameOrEmail" class="block mb-1 text-sm font-medium text-natural dark:text-white">
           {{ 'login.usernameLabel' | translate }}
@@ -40,8 +43,10 @@
             id="usernameOrEmail"
             type="text"
             formControlName="usernameOrEmail"
+            [attr.aria-describedby]="'usernameOrEmailError'"
             [placeholder]="'login.usernamePlaceholder' | translate"
             class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary dark:bg-surface dark:text-natural"
+            aria-required="true"
           />
           <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
             fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
@@ -49,13 +54,12 @@
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </div>
-        <div *ngIf="f['usernameOrEmail'].invalid && (f['usernameOrEmail'].dirty || f['usernameOrEmail'].touched)" class="text-danger text-xs mt-1">
+        <div *ngIf="f['usernameOrEmail'].invalid && (f['usernameOrEmail'].dirty || f['usernameOrEmail'].touched)" class="text-danger text-xs mt-1" id="usernameOrEmailError" role="alert">
           <div *ngIf="f['usernameOrEmail'].errors?.['required']">{{ 'login.usernameRequired' | translate }}</div>
           <div *ngIf="f['usernameOrEmail'].errors?.['minlength']">{{ 'login.usernameMinLength' | translate }}</div>
         </div>
       </div>
 
-       
       <div>
         <label for="password" class="block mb-1 text-sm font-medium text-natural dark:text-white">
           {{ 'login.passwordLabel' | translate }}
@@ -66,31 +70,29 @@
             id="password"
             formControlName="password"
             [placeholder]="'login.passwordPlaceholder' | translate"
+            [attr.aria-describedby]="'passwordError'"
             class="w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary dark:bg-surface dark:text-natural"
+            aria-required="true"
           />
           <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
             fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
-          <button type="button" (click)="toggleShowPassword()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 focus:outline-none">
-            <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
-            <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.967 9.967 0 012.388-3.879m1.32-1.26A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.956 9.956 0 01-4.576 5.165M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18" />
-            </svg>
+          <button 
+            type="button" 
+            (click)="toggleShowPassword()" 
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 focus:outline-none"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+          >
           </button>
         </div>
-        <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)" class="text-danger text-xs mt-1">
+        <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)" class="text-danger text-xs mt-1" id="passwordError" role="alert">
           <div *ngIf="f['password'].errors?.['required']">{{ 'login.passwordRequired' | translate }}</div>
           <div *ngIf="f['password'].errors?.['minlength']">{{ 'login.passwordMinLength' | translate }}</div>
         </div>
       </div>
 
-       
       <div class="flex items-center gap-2">
         <input
           id="remember-me"
@@ -99,14 +101,17 @@
           (change)="onRememberMeChange($event)"
           class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded dark:bg-surface dark:border-gray-600"
         />
-        <label for="remember-me" class="text-natural dark:text-white cursor-pointer">{{ 'login.rememberMe' | translate }}</label>
+        <label for="remember-me" class="text-natural dark:text-white cursor-pointer">
+          {{ 'login.rememberMe' | translate }}
+        </label>
       </div>
 
-       
       <button
         type="submit"
         [disabled]="loginForm.invalid || isLoading()"
         class="w-full bg-primary hover:bg-[#57bca7] text-white font-semibold py-2 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
+        [attr.aria-disabled]="loginForm.invalid || isLoading()"
+        aria-live="polite"
       >
         <ng-container *ngIf="!isLoading()">
           {{ 'login.buttonText' | translate }}
@@ -121,21 +126,26 @@
       </button>
     </form>
 
-     
     <p class="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
       {{ 'login.noAccount' | translate }}
-      <a [routerLink]="['/auth/register']" class="text-primary-600 font-medium">
+      <a 
+        [routerLink]="['/auth/register']" 
+        class="text-primary-600 font-medium"
+        aria-label="Register new account"
+      >
         {{ 'login.registerLink' | translate }}
       </a>
     </p>
   </div>
 
-   
-  <div class="hidden md:block border-l border-gray-300 dark:border-gray-600 mx-6 h-[400px]"></div>
+  <div class="hidden md:block border-l border-gray-300 dark:border-gray-600 mx-6 h-[400px]" aria-hidden="true"></div>
 
-   
   <div class="hidden md:block w-1/2">
-    <img src="../../../../assets/images/Loginpic.PNG" alt="Login illustration" class="object-cover h-full w-full" />
+    <img 
+      src="../../../../assets/images/Loginpic.PNG" 
+      alt="Login illustration" 
+      class="object-cover h-full w-full" 
+      role="img"
+    />
   </div>
-
 </div>

@@ -6,16 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   standalone: true,
   selector: 'app-login-required-dialog',
-  template: `
-    <h2 mat-dialog-title>Login Required</h2>
-    <mat-dialog-content>
-      <p>You need to log in before proceeding to checkout.</p>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button (click)="close()">Cancel</button>
-      <button mat-flat-button color="primary" (click)="goToLogin()">Login</button>
-    </mat-dialog-actions>
-  `,
+  templateUrl: './login-required-dialog-component.html',
+  styleUrls: ['./login-required-dialog-component.css'],
   imports: [MatDialogModule, MatButtonModule]
 })
 export class LoginRequiredDialogComponent {
