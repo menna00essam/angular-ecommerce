@@ -75,7 +75,8 @@ Open your browser at `http://localhost:4200/`.
 - ESLint with Prettier  
 - Tailwind CSS  
 - RxJS  
-
+- Angular Signals
+-Angular Reactive Forms
 ---
 
 ## Code Quality
