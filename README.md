@@ -92,6 +92,9 @@ Open your browser at `http://localhost:4200/`.
 - Light/Dark mode toggle
 - Docker support for easy deployment  
 - Responsive UI with Angular Material and Tailwind CSS
+- Advanced animations and transitions
+- Advanced accessibility features (screen reader support, keyboard navigation)
+
 
 ---
 
